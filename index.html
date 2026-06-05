@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovacomp | Soluciones Tecnológicas Inteligentes en Bolivia</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#09090b',
+                        darkcard: '#18181b',
+                        accent: {
+                            purple: '#8b5cf6',
+                            indigo: '#6366f1',
+                            teal: '#0ea5e9',
+                            emerald: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Alpine JS or Custom styles for animation -->
+    <style>
+        .glow-effect:hover {
+            box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.4);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+        /* Custom styling for active menu indicator */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #8b5cf6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-zinc-100 font-sans antialiased selection:bg-purple-600 selection:text-white overflow-x-hidden">
+
+    <header class="sticky top-0 z-50 w-full border-b border-zinc-800 bg-darkbg/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-20 items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-purple to-accent-indigo text-white shadow-lg shadow-purple-500/25">
+                        <i data-lucide="cpu" class="h-6 w-6"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-zinc-200 to-accent-purple bg-clip-text text-transparent">
+                        Innovacomp
+                    </span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#inicio" class="nav-link text-sm font-medium text-zinc-300 hover:text-white transition-colors">Inicio</a>
+                    <a href="#servicios" class="nav-link text-sm font-medium text-zinc-300 hover:text-white transition-colors">Servicios</a>
+                    <a href="#soluciones" class="nav-link text-sm font-medium text-zinc-300 hover:text-white transition-colors">Soluciones</a>
+                    <a href="#portafolio" class="nav-link text-sm font-medium text-zinc-300 hover:text-white transition-colors">Portafolio</a>
+                    <a href="#cotizador" class="nav-link text-sm font-medium text-accent-purple hover:text-purple-400 transition-colors flex items-center gap-1">
+                        <i data-lucide="calculator" class="h-4 w-4"></i> Cotizador
+                    </a>
+                    <a href="#contacto" class="nav-link text-sm font-medium text-zinc-300 hover:text-white transition-colors">Contacto</a>
+                </nav>
+
+                <!-- Action Button & WhatsApp Connection -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="tel:+59178162465" class="text-xs text-zinc-400 hover:text-white transition-colors flex flex-col items-end mr-2">
+                        <span class="font-normal">¿Tienes un proyecto?</span>
+                        <span class="font-semibold text-zinc-200">+591 78162465</span>
+                    </a>
+                    <a href="https://wa.me/59178162465?text=Hola%20Innovacomp,%20me%20gustar%C3%ADa%20solicitar%20una%20reuni%C3%B3n%20para%20un%20proyecto." target="_blank" class="inline-flex items-center gap-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 px-4 py-2 text-sm font-medium text-white transition-all duration-300 border border-zinc-700">
+                        <i data-lucide="message-square" class="h-4 w-4 text-accent-emerald animate-pulse"></i>
+                        Escríbenos
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white focus:outline-none" aria-expanded="false">
+                        <i data-lucide="menu" id="menu-icon-open" class="h-6 w-6"></i>
+                        <i data-lucide="x" id="menu-icon-close" class="hidden h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-zinc-800 bg-darkbg px-4 py-4 space-y-2">
+            <a href="#inicio" class="block rounded-lg px-4 py-2.5 text-base font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white">Inicio</a>
+            <a href="#servicios" class="block rounded-lg px-4 py-2.5 text-base font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white">Servicios</a>
+            <a href="#soluciones" class="block rounded-lg px-4 py-2.5 text-base font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white">Soluciones</a>
+            <a href="#portafolio" class="block rounded-lg px-4 py-2.5 text-base font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white">Portafolio</a>
+            <a href="#cotizador" class="block rounded-lg px-4 py-2.5 text-base font-medium text-accent-purple hover:bg-zinc-800 hover:text-white">Cotizador Inteligente</a>
+            <a href="#contacto" class="block rounded-lg px-4 py-2.5 text-base font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white">Contacto</a>
+            <div class="pt-4 border-t border-zinc-800 flex flex-col gap-3">
+                <a href="https://wa.me/59178162465" target="_blank" class="flex items-center justify-center gap-2 rounded-xl bg-accent-purple hover:bg-purple-700 px-4 py-3 text-sm font-medium text-white transition-all">
+                    <i data-lucide="phone-call" class="h-4 w-4"></i> Llámanos (+591 78162465)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-28">
+        <!-- Background Ambient Glows -->
+        <div class="absolute top-1/4 left-1/2 -z-10 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-purple/10 blur-[120px]"></div>
+        <div class="absolute bottom-10 right-10 -z-10 h-80 w-80 rounded-full bg-accent-indigo/15 blur-[100px]"></div>
+        
+        <!-- Grid overlay -->
+        <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1f1f23_1px,transparent_1px),linear-gradient(to_bottom,#1f1f23_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-950/40 px-4 py-1.5 text-xs font-semibold text-purple-300 mb-6 backdrop-blur-sm animate-fade-in">
+                <span class="flex h-2 w-2 rounded-full bg-accent-emerald"></span>
+                Impulsando la Transformación Digital en Bolivia
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.1] mb-8">
+                Especialistas en la creación de <br class="hidden sm:inline">
+                <span class="bg-gradient-to-r from-accent-purple via-accent-indigo to-accent-teal bg-clip-text text-transparent">
+                    Software de Impacto Mundial
+                </span>
+            </h1>
+
+            <!-- Rotating Text / Description of Specialties -->
+            <p class="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-12">
+                Creamos experiencias digitales personalizadas que escalan tu negocio. Desarrollamos desde páginas web responsivas y aplicaciones móviles nativas hasta sistemas de software empresarial robustos y a medida.
+            </p>
+
+            <!-- Interactive Specialty Carousel (Automatic & Manual) -->
+            <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto mb-12">
+                <span class="px-4 py-2 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm font-medium text-zinc-300 hover:border-accent-purple transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="layout" class="h-4 w-4 text-accent-purple"></i> Sitios Web Premium
+                </span>
+                <span class="px-4 py-2 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm font-medium text-zinc-300 hover:border-accent-indigo transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="smartphone" class="h-4 w-4 text-accent-indigo"></i> Apps Móviles iOS/Android
+                </span>
+                <span class="px-4 py-2 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm font-medium text-zinc-300 hover:border-accent-teal transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="shopping-cart" class="h-4 w-4 text-accent-teal"></i> E-commerce Avanzados
+                </span>
+                <span class="px-4 py-2 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm font-medium text-zinc-300 hover:border-accent-emerald transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="code" class="h-4 w-4 text-accent-emerald"></i> Software a Medida
+                </span>
+                <span class="px-4 py-2 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm font-medium text-zinc-300 hover:border-purple-500 transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="figma" class="h-4 w-4 text-purple-400"></i> Diseño UI/UX Exclusivo
+                </span>
+            </div>
+
+            <!-- CTA Actions -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#contacto" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-accent-purple hover:bg-purple-700 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-purple-500/20 transition-all duration-300 hover:-translate-y-1">
+                    Iniciar Proyecto <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                </a>
+                <a href="#servicios" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-8 py-4 text-base font-semibold text-zinc-200 transition-all duration-300 hover:-translate-y-1">
+                    Explorar Servicios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-24 border-t border-zinc-900 bg-zinc-950/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-accent-purple mb-3">Qué Hacemos</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Especialidades que transforman y automatizan tu negocio</p>
+                <p class="text-zinc-400">Diseñamos y programamos soluciones óptimas con tecnologías modernas que garantizan escalabilidad, rendimiento extremo y seguridad.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="group relative rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 glow-effect transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-purple/10 text-accent-purple group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="globe" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Sitios Web Corporativos</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                            Sitios web dinámicos, rápidos y responsivos con la mejor arquitectura SEO y diseño UX de primer nivel para captar clientes desde el primer segundo.
+                        </p>
+                    </div>
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-purple group-hover:text-purple-300 transition-colors mt-auto">
+                        Agendar Consultoría <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group relative rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 glow-effect transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-indigo/10 text-accent-indigo group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="smartphone" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Aplicaciones Móviles</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                            Desarrollamos aplicaciones robustas e intuitivas para Android e iOS a medida utilizando tecnologías híbridas como Flutter y React Native.
+                        </p>
+                    </div>
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-indigo group-hover:text-indigo-300 transition-colors mt-auto">
+                        Quiero una App <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group relative rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 glow-effect transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-teal/10 text-accent-teal group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="database" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Software a la Medida</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                            Digitalizamos y optimizamos los procesos internos de tu empresa con soluciones en la nube robustas, adaptadas exclusivamente a tu flujo operacional.
+                        </p>
+                    </div>
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-teal group-hover:text-teal-300 transition-colors mt-auto">
+                        Solicitar Software <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="group relative rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 glow-effect transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-emerald/10 text-accent-emerald group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="shopping-bag" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Plataformas E-Commerce</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                            Tiendas online completas con carritos fluidos, integradas a los procesadores de pago de Bolivia (Sintesis, PagosNet, Libélula) y sistemas de delivery automáticos.
+                        </p>
+                    </div>
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-emerald group-hover:text-emerald-300 transition-colors mt-auto">
+                        Digitalizar Ventas <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="group relative rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 glow-effect transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="layers" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Diseño de Experiencia (UI/UX)</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                            Diseñamos interfaces interactivas y prototipos en Figma modernos, estéticos y fáciles de usar, priorizando siempre la conversión y la experiencia.
+                        </p>
+                    </div>
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-sm font-semibold text-purple-400 group-hover:text-purple-300 transition-colors mt-auto">
+                        Ver Prototipos <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="group relative rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 glow-effect transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="fingerprint" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Seguridad y APIs</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                            Segurizamos tus bases de datos, APIs y servidores contra ataques comunes, integrando autenticación moderna con flujos SMS, OTP y de redes sociales.
+                        </p>
+                    </div>
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 group-hover:text-amber-300 transition-colors mt-auto">
+                        Auditar Sistema <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="soluciones" class="py-24 border-t border-zinc-900 relative">
+        <div class="absolute top-1/2 left-0 -z-10 h-72 w-72 rounded-full bg-accent-teal/5 blur-[120px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="max-w-3xl mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-accent-teal mb-3">Nuestras Soluciones SaaS</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Productos listos para potenciar y acelerar tu transformación</h3>
+                <p class="text-zinc-400">Ofrecemos plataformas de software prediseñadas listas para ser configuradas e instaladas en tu empresa en tiempo récord.</p>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Solution 1: InnovaConecta (Waconecta) -->
+                <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8 transition-all duration-300 hover:border-zinc-700">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-emerald/10 text-accent-emerald">
+                            <i data-lucide="message-square" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-accent-emerald uppercase tracking-wider">Solución WhatsApp OTP</span>
+                            <h4 class="text-2xl font-bold text-white mt-1 mb-3">InnovaConecta</h4>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                                Autentica tus clientes de forma nativa enviando códigos OTP de verificación e información directa por WhatsApp, garantizando altas conversiones y máxima seguridad de manera instantánea.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Seguridad OTP</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">WhatsApp API Oficial</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">99.9% Entrega</span>
+                            </div>
+                            <a href="https://wa.me/59178162465?text=Hola%20Innovacomp,%20quiero%20conocer%20mas%20detalles%20sobre%20InnovaConecta%20WhatsApp." target="_blank" class="inline-flex items-center gap-2 rounded-xl bg-accent-emerald/10 text-accent-emerald hover:bg-accent-emerald/20 px-4 py-2 text-sm font-semibold transition-colors">
+                                Solicitar Demo <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution 2: InnovaSys Legal & ERP (Legalsys) -->
+                <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8 transition-all duration-300 hover:border-zinc-700">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-purple/10 text-accent-purple">
+                            <i data-lucide="briefcase" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-accent-purple uppercase tracking-wider">Gestión Corporativa</span>
+                            <h4 class="text-2xl font-bold text-white mt-1 mb-3">InnovaSys ERP & Legal</h4>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                                Simplifica los procesos de administración, contratos y control legal de tu estudio, consorcio o corporación jurídica con un panel transparente y eficiente que optimiza la firma de documentos.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Control de Expedientes</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Control Horas</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Documentación</span>
+                            </div>
+                            <a href="https://wa.me/59178162465?text=Hola%20Innovacomp,%20estoy%20interesado%20en%20InnovaSys%20Legal." target="_blank" class="inline-flex items-center gap-2 rounded-xl bg-accent-purple/10 text-accent-purple hover:bg-accent-purple/20 px-4 py-2 text-sm font-semibold transition-colors">
+                                Solicitar Demo <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution 3: InnovaDelivery App -->
+                <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8 transition-all duration-300 hover:border-zinc-700">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-teal/10 text-accent-teal">
+                            <i data-lucide="truck" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-accent-teal uppercase tracking-wider">Multi-Tenant Delivery</span>
+                            <h4 class="text-2xl font-bold text-white mt-1 mb-3">InnovaDelivery App</h4>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                                Tu propia plataforma de pedidos y entregas estilo UberEats. Permite a múltiples sucursales u oficinas administrar y enviar pedidos locales conectando negocios, repartidores y usuarios.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Geolocalización GPS</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Panel Admin Real-Time</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Pagos Integrados</span>
+                            </div>
+                            <a href="https://wa.me/59178162465?text=Hola%20Innovacomp,%20me%20gustaria%20saber%20mas%20sobre%20InnovaDelivery%20App." target="_blank" class="inline-flex items-center gap-2 rounded-xl bg-accent-teal/10 text-accent-teal hover:bg-accent-teal/20 px-4 py-2 text-sm font-semibold transition-colors">
+                                Solicitar Demo <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution 4: InnovaLogistics (Papaya Logística) -->
+                <div class="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8 transition-all duration-300 hover:border-zinc-700">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-indigo/10 text-accent-indigo">
+                            <i data-lucide="navigation" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-accent-indigo uppercase tracking-wider">Envios & Última Milla</span>
+                            <h4 class="text-2xl font-bold text-white mt-1 mb-3">InnovaLogistics & Tracking</h4>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                                Administra tus entregas, paquetes y servicios postales sin complicaciones. Cuenta con control total sobre el inventario, rastreo en vivo de última milla para el cliente final y reportes analíticos de eficiencia.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Ruta Optimizada</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Rastreo por Enlace</span>
+                                <span class="rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">Panel Flotas</span>
+                            </div>
+                            <a href="https://wa.me/59178162465?text=Hola%20Innovacomp,%20requiero%20una%20reunion%20de%20demostracion%20para%20InnovaLogistics." target="_blank" class="inline-flex items-center gap-2 rounded-xl bg-accent-indigo/10 text-accent-indigo hover:bg-accent-indigo/20 px-4 py-2 text-sm font-semibold transition-colors">
+                                Solicitar Demo <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="portafolio" class="py-24 border-t border-zinc-900 bg-zinc-950/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-accent-purple mb-3">Nuestra Experiencia</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Casos de Éxito Digitales</h3>
+                    <p class="text-zinc-400 mt-2 max-w-2xl">He aquí proyectos donde nuestra ingeniería digital ha marcado la diferencia para empresas icónicas del país e internacionales.</p>
+                </div>
+                
+                <!-- Category Filters (Interactive) -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0" id="portfolio-filters">
+                    <button class="filter-btn px-4 py-1.5 rounded-lg text-xs font-semibold bg-accent-purple text-white transition-all" data-filter="all">Todos</button>
+                    <button class="filter-btn px-4 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-400 hover:text-white transition-all" data-filter="fintech">Fintech</button>
+                    <button class="filter-btn px-4 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-400 hover:text-white transition-all" data-filter="empresas">Empresariales</button>
+                    <button class="filter-btn px-4 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-400 hover:text-white transition-all" data-filter="apps">Aplicaciones</button>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                
+                <!-- Item 1: Sintesis -->
+                <div class="portfolio-item group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 transition-all duration-300" data-category="fintech">
+                    <div class="aspect-video w-full bg-gradient-to-br from-indigo-900 to-purple-950 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-20 transition-opacity"></div>
+                        <span class="z-10 rounded-full bg-indigo-500/10 border border-indigo-500/30 px-3 py-1 text-[10px] font-bold tracking-wider text-indigo-300 uppercase w-max">Sintesis S.A.</span>
+                        <div class="z-10">
+                            <span class="text-2xl font-bold text-white tracking-tight">sintesis.com.bo</span>
+                            <p class="text-xs text-zinc-300 mt-1">Especialistas en recaudaciones y pagos masivos.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-white mb-2">Pasarela Integral de Pagos</h4>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            Colaboración estratégica en el rediseño y optimización de flujos de pago físicos y en línea, permitiendo procesamientos estables a nivel nacional.
+                        </p>
+                        <a href="https://sintesis.com.bo" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent-purple hover:underline">
+                            Visitar Sitio <i data-lucide="external-link" class="h-3 w-3"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 2: Mis Cuentas -->
+                <div class="portfolio-item group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 transition-all duration-300" data-category="fintech">
+                    <div class="aspect-video w-full bg-gradient-to-br from-emerald-900 to-teal-950 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-20 transition-opacity"></div>
+                        <span class="z-10 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 text-[10px] font-bold tracking-wider text-emerald-300 uppercase w-max">Mis Cuentas</span>
+                        <div class="z-10">
+                            <span class="text-2xl font-bold text-white tracking-tight">miscuentas.com.bo</span>
+                            <p class="text-xs text-zinc-300 mt-1">Gestión ágil de facturación y cobro digital.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-white mb-2">App de Cobranza Móvil</h4>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            Desarrollo del motor de consultas y optimización de cargas, permitiendo que miles de usuarios paguen sus facturas de servicios básicos en segundos.
+                        </p>
+                        <a href="https://miscuentas.com.bo" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent-purple hover:underline">
+                            Visitar Sitio <i data-lucide="external-link" class="h-3 w-3"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 3: Hub 40 -->
+                <div class="portfolio-item group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 transition-all duration-300" data-category="empresas">
+                    <div class="aspect-video w-full bg-gradient-to-br from-purple-900 to-amber-950 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-20 transition-opacity"></div>
+                        <span class="z-10 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1 text-[10px] font-bold tracking-wider text-amber-300 uppercase w-max">Hub40 Bolivia</span>
+                        <div class="z-10">
+                            <span class="text-2xl font-bold text-white tracking-tight">hub40.com.bo</span>
+                            <p class="text-xs text-zinc-300 mt-1">El coworking número #1 de Bolivia.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-white mb-2">Portal Web Interactivo</h4>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            Plataforma de presentación moderna de espacios y reservas integrada a sistemas internos de membresías del hub corporativo de Manzana 40.
+                        </p>
+                        <a href="https://hub40.com.bo" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent-purple hover:underline">
+                            Visitar Sitio <i data-lucide="external-link" class="h-3 w-3"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 4: Preforte -->
+                <div class="portfolio-item group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 transition-all duration-300" data-category="empresas">
+                    <div class="aspect-video w-full bg-gradient-to-br from-rose-950 to-zinc-900 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-20 transition-opacity"></div>
+                        <span class="z-10 rounded-full bg-rose-500/10 border border-rose-500/30 px-3 py-1 text-[10px] font-bold tracking-wider text-rose-300 uppercase w-max">Preforte</span>
+                        <div class="z-10">
+                            <span class="text-2xl font-bold text-white tracking-tight">preforte.com.bo</span>
+                            <p class="text-xs text-zinc-300 mt-1">Soluciones innovadoras para construcción.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-white mb-2">Plataforma Industrial de Cotización</h4>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            Diseño UI moderno y desarrollo de calculadora de concreto y resistencia, facilitando el trabajo de preventa industrial a constructores.
+                        </p>
+                        <a href="https://preforte.com.bo" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent-purple hover:underline">
+                            Visitar Sitio <i data-lucide="external-link" class="h-3 w-3"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 5: PagosNet -->
+                <div class="portfolio-item group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 transition-all duration-300" data-category="fintech">
+                    <div class="aspect-video w-full bg-gradient-to-br from-blue-900 to-indigo-950 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-20 transition-opacity"></div>
+                        <span class="z-10 rounded-full bg-blue-500/10 border border-blue-500/30 px-3 py-1 text-[10px] font-bold tracking-wider text-blue-300 uppercase w-max">PagosNet</span>
+                        <div class="z-10">
+                            <span class="text-2xl font-bold text-white tracking-tight">pagosnet.com.bo</span>
+                            <p class="text-xs text-zinc-300 mt-1">Tu aliado estratégico de cobranza.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-white mb-2">Sistemas de Recaudaciones</h4>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            Apoyo en optimizaciones críticas de integración bancaria y desarrollo de sistemas de automatización de cierres de caja diarios para pymes.
+                        </p>
+                        <a href="https://pagosnet.com.bo" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent-purple hover:underline">
+                            Visitar Sitio <i data-lucide="external-link" class="h-3 w-3"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 6: Delivery App Express -->
+                <div class="portfolio-item group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 transition-all duration-300" data-category="apps">
+                    <div class="aspect-video w-full bg-gradient-to-br from-violet-900 to-fuchsia-950 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-20 transition-opacity"></div>
+                        <span class="z-10 rounded-full bg-violet-500/10 border border-violet-500/30 px-3 py-1 text-[10px] font-bold tracking-wider text-violet-300 uppercase w-max">InnovaDelivery</span>
+                        <div class="z-10">
+                            <span class="text-2xl font-bold text-white tracking-tight">Delivery Express</span>
+                            <p class="text-xs text-zinc-300 mt-1">Conectando negocios y conductores en Santa Cruz.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-white mb-2">Desarrollo Multiplataforma</h4>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            Aplicación para iOS y Android con geolocalización avanzada, mapas en tiempo real e integración instantánea con pasarelas locales QR de pago simple.
+                        </p>
+                        <a href="#contacto" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent-purple hover:underline">
+                            Solicitar Caso de Estudio <i data-lucide="info" class="h-3 w-3"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="cotizador" class="py-24 border-t border-zinc-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl border border-purple-500/30 bg-zinc-900/60 p-8 md:p-12 relative overflow-hidden">
+                <!-- Glowing background light -->
+                <div class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-accent-purple/20 blur-[50px]"></div>
+
+                <!-- Step Header -->
+                <div class="text-center mb-10">
+                    <span class="rounded-full bg-accent-purple/10 px-3 py-1 text-xs font-semibold text-accent-purple">Herramienta Interactiva</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-3 mb-2">Cotizador de Proyecto Inteligente</h3>
+                    <p class="text-zinc-400 text-sm">Estima el costo inicial y el tiempo de tu próximo software con nuestro cotizador interactivo.</p>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Option 1: Tipo de Proyecto -->
+                    <div>
+                        <label class="block text-sm font-semibold text-zinc-300 mb-4">1. Tipo de Software requerido:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="calc-project-type">
+                            <button class="calc-btn p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-center hover:border-accent-purple hover:bg-zinc-800/50 transition-all group flex flex-col items-center gap-2 active-calc" data-factor="1.0" data-label="Sitio Web">
+                                <i data-lucide="globe" class="h-5 w-5 text-accent-purple"></i>
+                                <span class="text-xs font-medium text-zinc-300">Sitio Web</span>
+                            </button>
+                            <button class="calc-btn p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-center hover:border-accent-purple hover:bg-zinc-800/50 transition-all group flex flex-col items-center gap-2" data-factor="1.8" data-label="App Móvil">
+                                <i data-lucide="smartphone" class="h-5 w-5 text-accent-indigo"></i>
+                                <span class="text-xs font-medium text-zinc-300">App Móvil</span>
+                            </button>
+                            <button class="calc-btn p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-center hover:border-accent-purple hover:bg-zinc-800/50 transition-all group flex flex-col items-center gap-2" data-factor="2.2" data-label="E-Commerce">
+                                <i data-lucide="shopping-bag" class="h-5 w-5 text-accent-teal"></i>
+                                <span class="text-xs font-medium text-zinc-300">E-Commerce</span>
+                            </button>
+                            <button class="calc-btn p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-center hover:border-accent-purple hover:bg-zinc-800/50 transition-all group flex flex-col items-center gap-2" data-factor="3.0" data-label="Software a Medida">
+                                <i data-lucide="database" class="h-5 w-5 text-accent-emerald"></i>
+                                <span class="text-xs font-medium text-zinc-300">Software Medida</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Option 2: Complejidad / Número de Pantallas -->
+                    <div>
+                        <label class="block text-sm font-semibold text-zinc-300 mb-4">2. Complejidad y Alcance de Pantallas/Flujos:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="calc-complexity">
+                            <button class="calc-btn-complexity p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-left hover:border-accent-purple hover:bg-zinc-800/50 transition-all active-calc" data-factor="1.0" data-label="Sencillo (1-5 pantallas)">
+                                <span class="block text-xs font-bold text-zinc-200">Básico</span>
+                                <span class="text-[10px] text-zinc-400">1-5 secciones fijas sin integraciones</span>
+                            </button>
+                            <button class="calc-btn-complexity p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-left hover:border-accent-purple hover:bg-zinc-800/50 transition-all" data-factor="1.7" data-label="Medio (5-15 pantallas con panel)">
+                                <span class="block text-xs font-bold text-zinc-200">Intermedio</span>
+                                <span class="text-[10px] text-zinc-400">Hasta 15 vistas, panel administrador básico</span>
+                            </button>
+                            <button class="calc-btn-complexity p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-left hover:border-accent-purple hover:bg-zinc-800/50 transition-all" data-factor="2.8" data-label="Avanzado (>15 pantallas con APIs)">
+                                <span class="block text-xs font-bold text-zinc-200">Avanzado / Corporativo</span>
+                                <span class="text-[10px] text-zinc-400">Dashboard complejo, integraciones de pago</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Option 3: Plazo de Entrega -->
+                    <div>
+                        <label class="block text-sm font-semibold text-zinc-300 mb-4">3. Plazo del Proyecto:</label>
+                        <div class="grid grid-cols-2 gap-3" id="calc-timeline">
+                            <button class="calc-btn-timeline p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-center hover:border-accent-purple hover:bg-zinc-800/50 transition-all active-calc" data-factor="1.0" data-label="Estándar (1-3 meses)">
+                                <span class="text-xs font-semibold text-zinc-300">Estándar (Planificado)</span>
+                            </button>
+                            <button class="calc-btn-timeline p-4 rounded-xl border border-zinc-800 bg-zinc-900 text-center hover:border-accent-purple hover:bg-zinc-800/50 transition-all" data-factor="1.4" data-label="Urgente (Sprints acelerados)">
+                                <span class="text-xs font-semibold text-zinc-300">Acelerado (Sprints Prioritarios)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Result Panel -->
+                    <div class="mt-8 rounded-2xl bg-zinc-950 p-6 border border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-6">
+                        <div>
+                            <span class="text-xs font-medium text-zinc-500 uppercase tracking-widest">Inversión Estimada Inicial</span>
+                            <div class="text-3xl font-black text-white mt-1 flex items-baseline gap-2">
+                                <span class="text-accent-purple text-base">USD</span>
+                                <span id="calc-final-price">750</span>
+                                <span class="text-zinc-500 text-xs font-normal">aprox.</span>
+                            </div>
+                            <span class="text-[10px] text-zinc-500 mt-2 block">Tiempo estimado: <strong id="calc-final-time">3-4 semanas</strong></span>
+                        </div>
+                        <button onclick="sendCalculatedQuoteToForm()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-accent-purple hover:bg-purple-700 px-6 py-3.5 text-sm font-bold text-white transition-all shadow-md shadow-purple-500/10">
+                            Me Interesa, Cotizar formal <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-24 border-t border-zinc-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Left Details / Contact Info -->
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-accent-purple mb-3">Contacto Directo</h2>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">¿Preparado para impulsar tu negocio?</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-8">
+                            Escríbenos sobre tu proyecto hoy mismo. Estudiamos tus necesidades tecnológicas y te contactamos en menos de 24 horas hábiles.
+                        </p>
+
+                        <!-- Information list -->
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-accent-purple">
+                                    <i data-lucide="map-pin" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-bold text-white">Ubicación principal</h5>
+                                    <p class="text-zinc-400 text-xs mt-1">Santa Cruz de la Sierra, Bolivia</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-accent-purple">
+                                    <i data-lucide="mail" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-bold text-white">Correo Electrónico</h5>
+                                    <p class="text-zinc-400 text-xs mt-1">contacto@innovacomp.bo</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-accent-emerald">
+                                    <i data-lucide="phone" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-bold text-white">Teléfono & WhatsApp</h5>
+                                    <p class="text-zinc-400 text-xs mt-1">+591 78162465</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client Testimonial Placeholder inside info -->
+                    <div class="mt-12 rounded-2xl bg-zinc-900/30 border border-zinc-800 p-6 relative">
+                        <i data-lucide="quote" class="h-8 w-8 text-zinc-700 absolute right-4 top-4"></i>
+                        <p class="text-xs text-zinc-400 italic">
+                            "Innovacomp transformó por completo nuestro flujo de despachos. La aplicación es sumamente fluida y estable. ¡Totalmente recomendados!"
+                        </p>
+                        <div class="flex items-center gap-3 mt-4">
+                            <div class="h-8 w-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-[10px] font-bold">JD</div>
+                            <div>
+                                <h6 class="text-xs font-bold text-white">Jorge Domínguez</h6>
+                                <p class="text-[9px] text-zinc-500">Socio Tecnológico, Preforte</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Contact Form -->
+                <div class="lg:col-span-7 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8">
+                    <h4 class="text-lg font-bold text-white mb-6">Enviar Mensaje</h4>
+                    <form id="contact-form" class="space-y-5" onsubmit="handleFormSubmit(event)">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="name" class="block text-xs font-semibold text-zinc-400 mb-1.5">Nombre Completo *</label>
+                                <input type="text" id="name" required class="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-accent-purple focus:outline-none transition-colors" placeholder="Ej: Alejandra Justiniano">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-xs font-semibold text-zinc-400 mb-1.5">Correo Electrónico *</label>
+                                <input type="email" id="email" required class="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-accent-purple focus:outline-none transition-colors" placeholder="alejandra@empresa.com">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="phone-input" class="block text-xs font-semibold text-zinc-400 mb-1.5">Celular / WhatsApp *</label>
+                                <input type="text" id="phone-input" required class="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-accent-purple focus:outline-none transition-colors" placeholder="Ej: +591 78162465">
+                            </div>
+                            <div>
+                                <label for="service-needed" class="block text-xs font-semibold text-zinc-400 mb-1.5">¿Qué servicio necesitas?</label>
+                                <select id="service-needed" class="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-4 py-3 text-sm text-zinc-300 focus:border-accent-purple focus:outline-none transition-colors">
+                                    <option value="Sitio Web">Sitio Web</option>
+                                    <option value="Aplicación Móvil">Aplicación Móvil</option>
+                                    <option value="E-Commerce">E-Commerce</option>
+                                    <option value="Software a Medida">Software a Medida</option>
+                                    <option value="InnovaConecta (WhatsApp)">InnovaConecta (WhatsApp)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="discovery" class="block text-xs font-semibold text-zinc-400 mb-1.5">¿Cómo te enteraste de nosotros?</label>
+                            <select id="discovery" class="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-4 py-3 text-sm text-zinc-300 focus:border-accent-purple focus:outline-none transition-colors">
+                                <option value="Búsqueda de Google">Búsqueda de Google</option>
+                                <option value="Recomendación">Recomendación / Colega</option>
+                                <option value="Redes Sociales">Redes Sociales (FB, Instagram, TikTok)</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-xs font-semibold text-zinc-400 mb-1.5">Detalles del Proyecto / Mensaje *</label>
+                            <textarea id="message" required rows="4" class="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-accent-purple focus:outline-none transition-colors" placeholder="Cuéntanos un poco sobre lo que deseas construir..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent-purple hover:bg-purple-700 px-6 py-3.5 text-sm font-semibold text-white transition-all shadow-lg shadow-purple-500/10">
+                            Enviar Solicitud <i data-lucide="send" class="h-4 w-4"></i>
+                        </button>
+                    </form>
+
+                    <!-- Alert message container (hidden by default) -->
+                    <div id="form-alert" class="hidden mt-4 p-4 rounded-xl text-sm font-medium"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-zinc-950 border-t border-zinc-900 py-16 text-zinc-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                
+                <!-- Brand details -->
+                <div class="col-span-1 md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-purple text-white shadow-md">
+                            <i data-lucide="cpu" class="h-5 w-5"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white tracking-tight">Innovacomp</span>
+                    </div>
+                    <p class="text-sm text-zinc-500 max-w-sm">
+                        Líderes en ingeniería informática y desarrollo de plataformas premium adaptables a las necesidades tecnológicas del mercado nacional e internacional.
+                    </p>
+                    <div class="flex items-center gap-4 pt-2">
+                        <a href="https://facebook.com" target="_blank" class="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 hover:text-white transition-all">
+                            <i data-lucide="facebook" class="h-4 w-4"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 hover:text-white transition-all">
+                            <i data-lucide="linkedin" class="h-4 w-4"></i>
+                        </a>
+                        <a href="https://wa.me/59178162465" target="_blank" class="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 hover:text-white transition-all">
+                            <i data-lucide="message-square" class="h-4 w-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h5 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Enlaces Rápidos</h5>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#servicios" class="hover:text-white transition-colors">Nuestros Servicios</a></li>
+                        <li><a href="#soluciones" class="hover:text-white transition-colors">Soluciones Listas</a></li>
+                        <li><a href="#portafolio" class="hover:text-white transition-colors">Portafolio</a></li>
+                        <li><a href="#cotizador" class="hover:text-white transition-colors">Cotizador</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legals and terms -->
+                <div>
+                    <h5 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Legal & Privacidad</h5>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Política de Privacidad</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Términos de Servicio</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Soporte Tecnológico</a></li>
+                        <li><a href="https://tech.engaged.com.bo" target="_blank" class="hover:text-white transition-colors text-zinc-600 flex items-center gap-1 text-xs mt-4">Inspirado en Engaged Tech <i data-lucide="arrow-up-right" class="h-3 w-3"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Copyright and footnote -->
+            <div class="border-t border-zinc-900 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-500">
+                <p>&copy; 2026 Innovacomp S.R.L. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-2">
+                    <span class="flex h-2 w-2 rounded-full bg-accent-emerald"></span>
+                    <span>Sistemas activos & estables</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Web Connection Badge -->
+    <a href="https://wa.me/59178162465?text=Hola%20Innovacomp,%20requiero%20asesoramiento%20para%20un%20proyecto%20tecnologico." target="_blank" class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-accent-emerald text-white shadow-xl shadow-emerald-950/20 hover:scale-110 active:scale-95 transition-all">
+        <i data-lucide="message-circle" class="h-7 w-7"></i>
+    </a>
+
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-icon-open');
+        const closeIcon = document.getElementById('menu-icon-close');
+
+        menuBtn.addEventListener('click', () => {
+            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+            menuBtn.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Portfolio filtering logic
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state of buttons
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-accent-purple', 'text-white');
+                    b.classList.add('bg-zinc-900', 'text-zinc-400', 'hover:text-white');
+                });
+                btn.classList.add('bg-accent-purple', 'text-white');
+                btn.classList.remove('bg-zinc-900', 'text-zinc-400', 'hover:text-white');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Calculator Interactive Core logic
+        let selectedFactorType = 1.0;
+        let selectedFactorComplexity = 1.0;
+        let selectedFactorTimeline = 1.0;
+
+        let labelType = "Sitio Web";
+        let labelComplexity = "Sencillo";
+        let labelTimeline = "Estándar";
+
+        const baseUSD = 750;
+
+        // Project Type factors
+        const typeButtons = document.querySelectorAll('#calc-project-type .calc-btn');
+        typeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                typeButtons.forEach(b => b.classList.remove('active-calc', 'border-accent-purple', 'bg-zinc-800/50'));
+                btn.classList.add('active-calc', 'border-accent-purple', 'bg-zinc-800/50');
+                selectedFactorType = parseFloat(btn.getAttribute('data-factor'));
+                labelType = btn.getAttribute('data-label');
+                calculateEstimate();
+            });
+        });
+
+        // Complexity factors
+        const complexityButtons = document.querySelectorAll('#calc-complexity .calc-btn-complexity');
+        complexityButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                complexityButtons.forEach(b => b.classList.remove('active-calc', 'border-accent-purple', 'bg-zinc-800/50'));
+                btn.classList.add('active-calc', 'border-accent-purple', 'bg-zinc-800/50');
+                selectedFactorComplexity = parseFloat(btn.getAttribute('data-factor'));
+                labelComplexity = btn.getAttribute('data-label');
+                calculateEstimate();
+            });
+        });
+
+        // Timeline factors
+        const timelineButtons = document.querySelectorAll('#calc-timeline .calc-btn-timeline');
+        timelineButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                timelineButtons.forEach(b => b.classList.remove('active-calc', 'border-accent-purple', 'bg-zinc-800/50'));
+                btn.classList.add('active-calc', 'border-accent-purple', 'bg-zinc-800/50');
+                selectedFactorTimeline = parseFloat(btn.getAttribute('data-factor'));
+                labelTimeline = btn.getAttribute('data-label');
+                calculateEstimate();
+            });
+        });
+
+        function calculateEstimate() {
+            // Price estimation formula
+            const total = Math.round(baseUSD * selectedFactorType * selectedFactorComplexity * selectedFactorTimeline);
+            document.getElementById('calc-final-price').innerText = total;
+
+            // Time estimation formula
+            let baseWeeks = 3;
+            if (selectedFactorType > 2.0) baseWeeks = 6;
+            if (selectedFactorComplexity > 2.0) baseWeeks += 4;
+            if (selectedFactorTimeline > 1.2) baseWeeks = Math.max(2, Math.round(baseWeeks * 0.7)); // Rush delivers faster
+
+            document.getElementById('calc-final-time').innerText = `${baseWeeks}-${baseWeeks + 2} semanas`;
+        }
+
+        function sendCalculatedQuoteToForm() {
+            // Smooth scroll to form
+            document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+
+            // Auto select matching values
+            const serviceSelect = document.getElementById('service-needed');
+            if (labelType.includes("Sitio")) serviceSelect.value = "Sitio Web";
+            else if (labelType.includes("App")) serviceSelect.value = "Aplicación Móvil";
+            else if (labelType.includes("Commerce")) serviceSelect.value = "E-Commerce";
+            else serviceSelect.value = "Software a Medida";
+
+            // Prefill detail message
+            const finalPrice = document.getElementById('calc-final-price').innerText;
+            const messageArea = document.getElementById('message');
+            messageArea.value = `Hola Innovacomp. Usé su cotizador interactivo para un proyecto de tipo "${labelType}" con complejidad "${labelComplexity}" y plazo "${labelTimeline}". La estimación inicial arrojó un monto aproximado de $USD ${finalPrice}. Deseo formalizar una propuesta oficial.`;
+        }
+
+        // Contact Form action handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone-input').value;
+            const service = document.getElementById('service-needed').value;
+            const message = document.getElementById('message').value;
+            const alertBox = document.getElementById('form-alert');
+
+            // Feedback simulator (instead of alert)
+            alertBox.classList.remove('hidden', 'bg-red-950/50', 'text-red-400', 'border-red-500/30', 'bg-emerald-950/50', 'text-emerald-400', 'border-emerald-500/30');
+            
+            // Basic loader state
+            alertBox.classList.add('block', 'bg-zinc-900', 'text-zinc-300', 'border', 'border-zinc-800');
+            alertBox.innerText = "Procesando tu solicitud...";
+
+            setTimeout(() => {
+                alertBox.classList.remove('bg-zinc-900', 'text-zinc-300', 'border-zinc-800');
+                alertBox.classList.add('bg-emerald-950/50', 'text-emerald-400', 'border', 'border-emerald-500/30');
+                alertBox.innerText = `¡Gracias, ${name}! Tu solicitud para "${service}" ha sido registrada con éxito. Un especialista de Innovacomp se pondrá en contacto al celular ${phone} en menos de 24 horas.`;
+                
+                // Clear Form
+                document.getElementById('contact-form').reset();
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
+
